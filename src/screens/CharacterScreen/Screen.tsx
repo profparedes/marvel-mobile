@@ -3,14 +3,17 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { View, Text } from 'react-native';
 import { RootStackParamListType } from 'routes/index';
 
-type HomeScreenType = NativeStackScreenProps<RootStackParamListType, 'Home'>;
+type CharactersScreenType = NativeStackScreenProps<
+  RootStackParamListType,
+  'CharacterScreen'
+>;
 
-const HomeScreen: React.FC<HomeScreenType> = () => {
+const CharacterScreen: React.FC<CharactersScreenType> = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Hello Native</Text>
+      <Text>Characters screen</Text>
     </View>
   );
 };
 
-export default HomeScreen;
+export default CharacterScreen;

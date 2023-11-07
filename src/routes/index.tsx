@@ -1,17 +1,20 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { HomeScreen } from 'screens/HomeScreen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import CharacterViewRouter from './CharacterViewRouter';
+import ComicViewRouter from './ComicViewRouter';
 
 export type RootStackParamListType = {
-  Home: undefined;
+  Characters: undefined;
+  Comics: undefined;
 };
 
-const Stack = createNativeStackNavigator<RootStackParamListType>();
+const Tab = createBottomTabNavigator<RootStackParamListType>();
 
 const MainRoutes: React.FC = () => {
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={HomeScreen} />
-    </Stack.Navigator>
+    <Tab.Navigator>
+      <Tab.Screen name="Characters" component={CharacterViewRouter} />
+      <Tab.Screen name="Comics" component={ComicViewRouter} />
+    </Tab.Navigator>
   );
 };
 
