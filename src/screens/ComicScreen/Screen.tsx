@@ -1,10 +1,10 @@
 import React from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { View, Text } from 'react-native';
-import { RootStackParamListType } from 'routes/index';
+import { ComicStackParamListType } from 'routes/ComicViewRouter';
 
 type ComicScreenType = NativeStackScreenProps<
-  RootStackParamListType,
+  ComicStackParamListType,
   'ComicScreen'
 >;
 

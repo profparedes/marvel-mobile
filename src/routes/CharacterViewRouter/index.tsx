@@ -5,22 +5,21 @@ import {
 import { CharacterScreen } from 'screens/CharacterScreen';
 import { CharactersScreen } from 'screens/CharactersScreen';
 import { CharacterType } from 'types/CharacterType';
+import { RootStackParamListType } from '..';
 
 type CharacterViewRouterType = NativeStackScreenProps<
   RootStackParamListType,
-  'CharacterViewRouter'
+  'Characters'
 >;
 
-export type RootStackParamListType = {
+export type CharacterStackParamListType = {
   CharactersScreen: undefined;
   CharacterScreen: { character: CharacterType };
 };
 
-const Stack = createNativeStackNavigator<RootStackParamListType>();
+const Stack = createNativeStackNavigator<CharacterStackParamListType>();
 
-const CharacterViewRouter: React.FC<CharacterViewRouterType> = ({ route }) => {
-  const { character } = route.params;
-
+const CharacterViewRouter: React.FC<CharacterViewRouterType> = () => {
   return (
     <Stack.Navigator
       screenOptions={{

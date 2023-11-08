@@ -5,22 +5,21 @@ import {
 import { ComicScreen } from 'screens/ComicScreen';
 import { ComicsScreen } from 'screens/ComicsScreen';
 import { ComicType } from 'types/ComicType';
+import { RootStackParamListType } from '..';
 
 type ComicViewRouterType = NativeStackScreenProps<
   RootStackParamListType,
-  'ComicViewRouter'
+  'Comics'
 >;
 
-export type RootStackParamListType = {
+export type ComicStackParamListType = {
   ComicsScreen: undefined;
   ComicScreen: { comic: ComicType };
 };
 
-const Stack = createNativeStackNavigator<RootStackParamListType>();
+const Stack = createNativeStackNavigator<ComicStackParamListType>();
 
-const ComicViewRouter: React.FC<ComicViewRouterType> = ({ route }) => {
-  const { comic } = route.params;
-
+const ComicViewRouter: React.FC<ComicViewRouterType> = () => {
   return (
     <Stack.Navigator
       screenOptions={{

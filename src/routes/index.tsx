@@ -1,10 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import CharacterViewRouter from './CharacterViewRouter';
-import ComicViewRouter from './ComicViewRouter';
+import { NavigatorScreenParams } from '@react-navigation/native';
+import CharacterViewRouter, {
+  CharacterStackParamListType,
+} from './CharacterViewRouter';
+import ComicViewRouter, { ComicStackParamListType } from './ComicViewRouter';
 
 export type RootStackParamListType = {
-  Characters: undefined;
-  Comics: undefined;
+  Characters: NavigatorScreenParams<CharacterStackParamListType>;
+  Comics: NavigatorScreenParams<ComicStackParamListType>;
 };
 
 const Tab = createBottomTabNavigator<RootStackParamListType>();
