@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { View, Text } from 'react-native';
+import { FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { CharacterCard } from 'src/component/CharacterCard';
+import { useCharacters } from 'src/context/CharactersContext';
 import { CharacterStackParamListType } from 'routes/CharacterViewRouter';
 
 type CharactersScreenType = NativeStackScreenProps<
@@ -8,11 +11,33 @@ type CharactersScreenType = NativeStackScreenProps<
   'CharactersScreen'
 >;
 
-const CharactersScreen: React.FC<CharactersScreenType> = () => {
+const CharactersScreen: React.FC<CharactersScreenType> = ({ navigation }) => {
+  const { characters, isLoading, fetchCharacters } = useCharacters();
+
+  useEffect(() => {
+    fetchCharacters(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Character screen</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
+      {!isLoading && characters.length > 0 && (
+        <FlatList
+          data={characters}
+          numColumns={2}
+          renderItem={({ item }) => (
+            <CharacterCard
+              onPress={() =>
+                navigation.navigate('CharacterScreen', {
+                  character: item,
+                })
+              }
+              character={item}
+            />
+          )}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      )}
+    </SafeAreaView>
   );
 };
 
