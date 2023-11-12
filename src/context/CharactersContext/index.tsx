@@ -40,7 +40,6 @@ export const CharactersProvider: React.FC<ICharactersProviderProps> = ({
     const limit = 36;
     const offset = (page - 1) * limit;
 
-    setCurrentPage(page);
     setIsLoading(true);
     setError(null);
 
@@ -54,8 +53,12 @@ export const CharactersProvider: React.FC<ICharactersProviderProps> = ({
       const response = await Api.get('/characters', {
         params,
       });
-      setCharacters(response.data.data.results);
-      setTotalPages(Math.ceil(response.data.data.total / limit));
+      setCurrentPage(page);
+      setCharacters((prevCharacters) => [
+        ...prevCharacters,
+        ...response.data.data.results,
+      ]);
+      setTotalPages(response.data.data.total / limit);
     } catch {
       // eslint-disable-next-line no-console
       setError('Falha no carregamento da API');

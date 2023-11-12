@@ -2,6 +2,7 @@ import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
+import { CharactersProvider } from 'src/context/CharactersContext';
 import { CharacterScreen } from 'screens/CharacterScreen';
 import { CharactersScreen } from 'screens/CharactersScreen';
 import { CharacterType } from 'types/CharacterType';
@@ -21,14 +22,16 @@ const Stack = createNativeStackNavigator<CharacterStackParamListType>();
 
 const CharacterViewRouter: React.FC<CharacterViewRouterType> = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="CharactersScreen" component={CharactersScreen} />
-      <Stack.Screen name="CharacterScreen" component={CharacterScreen} />
-    </Stack.Navigator>
+    <CharactersProvider>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="CharactersScreen" component={CharactersScreen} />
+        <Stack.Screen name="CharacterScreen" component={CharacterScreen} />
+      </Stack.Navigator>
+    </CharactersProvider>
   );
 };
 

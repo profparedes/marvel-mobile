@@ -18,6 +18,7 @@ const CharactersScreen: React.FC<CharactersScreenType> = ({ navigation }) => {
     fetchCharacters(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
       {!isLoading && characters.length > 0 && (
