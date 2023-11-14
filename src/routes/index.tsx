@@ -14,9 +14,35 @@ const Tab = createBottomTabNavigator<RootStackParamListType>();
 
 const MainRoutes: React.FC = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Characters" component={CharacterViewRouter} />
-      <Tab.Screen name="Comics" component={ComicViewRouter} />
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: '#000',
+          borderTopColor: 'red',
+          borderTopWidth: 2,
+          height: 40,
+        },
+        tabBarActiveTintColor: 'red',
+        tabBarInactiveTintColor: 'grey',
+      }}
+    >
+      <Tab.Screen
+        name="Characters"
+        component={CharacterViewRouter}
+        options={{
+          tabBarLabel: 'CharacterTab',
+          tabBarIcon: () => null,
+        }}
+      />
+      <Tab.Screen
+        name="Comics"
+        component={ComicViewRouter}
+        options={{
+          tabBarLabel: 'Comics',
+          tabBarIcon: () => null,
+        }}
+      />
     </Tab.Navigator>
   );
 };

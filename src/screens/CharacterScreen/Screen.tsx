@@ -1,18 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Image, ScrollView } from '@gluestack-ui/themed';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useCharacters } from 'contexts/CharactersContext';
+import { getImageUrl } from 'helpers/index';
 import { CharacterStackParamListType } from 'routes/CharacterViewRouter';
+import { CharacterType } from 'types/CharacterType';
 
-type CharactersScreenType = NativeStackScreenProps<
+type CharacterScreenType = NativeStackScreenProps<
   CharacterStackParamListType,
   'CharacterScreen'
->;
+> & {
+  character: CharacterType;
+};
 
-const CharacterScreen: React.FC<CharactersScreenType> = () => {
+const CharacterScreen: React.FC<CharacterScreenType> = ({
+  character: routeCharacter,
+}) => {
+  const { character, isLoading, fetchCharacter } = useCharacters();
+
+  useEffect(() => {
+    if (routeCharacter.id) fetchCharacter(routeCharacter.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Characters screen</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
+      {isLoading && <Text>Loading...</Text>}
+      {character && (
+        <ScrollView>
+          <Image
+            source={{ uri: getImageUrl(character.thumbnail) }}
+            alt={character.name}
+            alignSelf="center"
+          />
+          <Text>{character.name}</Text>
+        </ScrollView>
+      )}
+    </SafeAreaView>
   );
 };
 

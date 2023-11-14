@@ -9,7 +9,7 @@ Api.interceptors.request.use((set) => {
   return {
     ...set,
     params: {
-      ...config,
+      ...set.params,
       ts: config.api.ts,
       apikey: config.api.key,
       hash: config.api.hash,
